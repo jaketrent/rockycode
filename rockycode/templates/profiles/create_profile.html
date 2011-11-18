@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Create Profile{% endblock %}
+
+{% block body %}
+<h1>Create profile for {{ user }} </h1>
+
+<form method="POST" action="">
+  {% for field in form %}
+      <dl>
+        <dt>{{ field.label_tag }}</dt>
+        <dd>
+          {% if field.errors %}
+            <p class="error">{{ field.errors }}</p>
+          {% endif %}
+          {{ field }}
+        </dd>
+      </dl>
+  {% endfor %}
+  <input type="submit" name="submit" value="Create" id="submit">
+</form>
+
+{% endblock body %}

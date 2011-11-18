@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load blog_tags %}
+{% load markup %}
+
+{% block article_tab %}active{% endblock %}
+
+{% block title %}
+  {{ guide.title }}
+  -
+  {{ block.super }}
+{% endblock %}
+
+{% block logo %}
+  <a href="{% url home %}"><h2 id="logo">RockyCode</h2></a>
+{% endblock %}
+
+{% block main %}
+
+  <p style="margin-bottom:-11px;">A guide on</p>
+  <h1>{{ guide.title }}</h1>
+
+  {% for a in articles %}
+    {% list_template a %}
+  {% endfor %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+  <section class="top-align">
+    <header>
+      <h3>About this Guide</h3>
+    </header>
+    <p>
+      {{ guide.description }}
+    </p>
+  </section>
+
+{% endblock %}

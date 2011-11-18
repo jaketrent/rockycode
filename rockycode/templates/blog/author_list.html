@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block author_tab %}active{% endblock %}
+
+{% block feeds %}
+  {{ block.super }}
+  {% for a in authors %}
+    <link rel="alternate" type="application/rss+xml" title="{{ a.username }} feed" href="/feeds/author/{{ a.username }}.rss" />
+  {% endfor %}
+{% endblock %}
+
+{% block body %}
+  <div id="main" class="wide" role="main">
+    {% block main %}
+      <ul id="authors">
+        {% for a in authors %}
+          <li>
+            <article>
+              <header>
+                <a href="{% url author_detail a.username %}">
+                  <h2>{{ a.first_name|default:"user" }} {{ a.last_name }}</h2>
+                </a>
+              </header>
+              <a href="{% url author_detail a.username %}">
+                <img src="{{ a.get_profile.image_path }}" class="avatar" />
+              </a>
+              <p>
+                {{ a.get_profile.bio|truncatewords_html:"21" }}
+              </p>
+              <a href="{% url author_detail a.username %}" class="continue">See profile</a>
+            </article>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endblock %}
+  </div>
+{% endblock %}

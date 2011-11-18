@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block tech_tab %}active{% endblock %}
+
+{% block feeds %}
+  {{ block.super }}
+  {% tags_for_model blog.Article as techs with counts %}
+  {% for t in techs %}
+    <link rel="alternate" type="application/rss+xml" title="{{ t.name|capfirst }} feed" href="/feeds/tech/{{ t.name }}.rss" />
+  {% endfor %}
+{% endblock %}
+
+{% block main %}
+
+  <section id="techs" class="links">
+    {% tags_for_model blog.Article as techs with counts %}
+    <header>
+      <h3>Technologies</h3>
+    </header>
+    <ul>
+    {% for t in techs %}
+      <li>
+        <a href="{% url article_list_tech t.name %}">{{ t.name }}</a>
+        <span>{{ t.count }}</span>
+        <span class="rss"><a href="/feeds/tech/{{ t.name }}.rss" class="rss">RSS</a></span>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}
+
+{% block sidebar %}
+
+  <section class="top-align">
+    <header>
+      <h3>Top Technologies</h3>
+    </header>
+    <ol>
+      {% for t in top_techs %}
+        <li>
+          <a href="{% url article_list_tech t.name %}">{{ t.name }}</a>
+          <span>{{ t.article_count }}</span>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+{% endblock %}

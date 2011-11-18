@@ -1,0 +1,27 @@
+<article class="type-detail type-blog">
+  <header>
+    <h1>{{ object.title }}</h1>
+    <p>
+      posted by {{ object.user.first_name|default:"user" }}
+      on <time datetime="{{ object.date_published|date:"Y-m-d"}}" pubdate="pubdate">{{ object.date_published|date:"d M Y" }}</time>
+    </p>
+  </header>
+  {{ object.summary|safe|linebreaks }}
+  {% if object.demo or object.source or object.source_path %}
+    <section class="two-btn demo">
+      {% if object.demo %}<a href="{% url upload_path object.demo %}">Demo</a>{% endif %}
+      {% if object.source %}<a href="{{ object.source.url }}">Source</a>{% endif %}
+      {% if object.source_path %}<a href="{{ object.source_path }}">Source</a>{% endif %}
+    </section>
+  {% endif %}
+  {{ object.get_rendered_body|safe }}
+  <footer>
+    <section class="two-btn share">
+      <header>
+        <h3>Share the delectableness</h3>
+      </header>
+      <a href="http://twitter.com/home?status=Slurp up the delectableness of RockyCode: {{ object.get_url }}" class="twitter">Twitter</a>
+      <a href="http://www.facebook.com/sharer.php?u={{ object.get_url }}&t={{ object.title }}" class="facebook">Facebook</a>
+    </section>
+  </footer>
+</article>

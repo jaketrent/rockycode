@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+<h1>Edit contact info for {{ user }} </h1>
+
+<img src="{{ user.get_profile.image_path }})" />
+
+<form method="POST" action="">
+ {% for field in form %}
+     <dl>
+       <dt>{{ field.label_tag }}</dt>
+       <dd>
+         {% if field.errors %}
+           <p class="error">{{ field.errors }}</p>
+         {% endif %}
+         {{ field }}
+         {% if field.help_text %}
+          {{ field.help_text|safe }}
+         {% endif %}
+       </dd>
+     </dl>
+ {% endfor %}
+ <input type="submit" name="submit" value="Edit" id="submit">
+</form>
+
+
+{% endblock body %}

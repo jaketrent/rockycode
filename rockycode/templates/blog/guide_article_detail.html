@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load blog_tags %}
+{% load markup %}
+
+{% block article_tab %}active{% endblock %}
+
+{% block title %}
+  {{ article.title }}
+  -
+  {{ block.super }}
+{% endblock %}
+
+{% block meta-desc %}
+  <meta name="Description" content="{{ article.summary|escape|truncatewords:"30" }}" />
+{% endblock %}
+{% block meta-keywords %}
+  {% load tagging_tags %}
+  {% tags_for_object article as tag_list %}
+  <meta name="Keywords" content="{% for tag in tag_list %}{{ tag }}{% if forloop.last %}{% else %},{% endif %}{% endfor %}" />
+{% endblock %}
+
+{% block styles %}
+  {{ block.super }}
+  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}styles/code.css"/>
+{% endblock %}
+
+{% block logo %}
+  <a href="{% url home %}"><h2 id="logo">RockyCode</h2></a>
+{% endblock %}
+
+{% block main %}
+
+  {% detail_template article %}
+
+  <section>
+    <header>
+      <h3 style="font-size: 24px;margin-top:20px;">Leave a comment</h3>
+    </header>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    /**
+        * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread]
+        */
+      var disqus_identifier = '{{ article.title_slug }}';
+      var disqus_developer = {{ disqus_dev }};
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://{{ disqus_forum }}.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript={{ disqus_forum }}">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+
+{% endblock %}
+
+{% block sidebar %}
+  {% with article.user.get_profile as author %}
+    <section class="author top-bump">
+      <header>
+        <h3>About {{ article.user.first_name }} {{ article.user.last_name }}</h3>
+      </header>
+      {% if author.image_path %}
+        <img class="avatar" src="{{ author.image_path }}" />
+      {% endif %}
+      {{ author.bio|safe|linebreaks|truncatewords_html:"40" }}
+      <a href="{% url author_detail article.user.username %}" class="continue">See profile</a>
+    </section>
+  {% endwith %}
+
+  <section class="techs">
+    <header>
+      <h3>Technologies</h3>
+    </header>
+    {% with article as object %}
+      {% include "includes/_tag_list.html" %}
+    {% endwith %}
+  </section>
+
+{% endblock %}
+
+{% block scripts-bottom %}
+  {{ block.super }}
+  <script type="text/javascript">
+  //<![CDATA[
+  (function() {
+    var links = document.getElementsByTagName('a');
+    var query = '?';
+    for(var i = 0; i < links.length; i++) {
+      if(links[i].href.indexOf('#disqus_thread') >= 0) {
+        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+      }
+    }
+    document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/{{ disqus_forum }}/get_num_replies.js' + query + '"></' + 'script>');
+  })();
+  //]]>
+  </script>
+{% endblock %}

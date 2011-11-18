@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load blog_tags %}
+
+{% block main %}
+  
+  {% with articles|first as hilight %}
+    <article class="hilite">
+      <header>
+        <h2><a href="{% url article_detail hilight.title_slug %}">{{ hilight.title }}</a></h2>
+        <p>
+          posted by <a href="{% url article_list_author hilight.user.username %}">{{ hilight.user.first_name|default:"user" }}</a>
+          on <time datetime="{{ hilight.date_published|date:"Y-m-d"}}" pubdate="pubdate">{{ hilight.date_published|date:"d M Y" }}</time>
+        </p>
+      </header>
+      <p>
+        {% if hilight.user.get_profile.image_path %}
+          <img class="avatar" src="{{ hilight.user.get_profile.image_path }}" />
+        {% endif %}
+        {{ hilight.summary|safe|linebreaks|truncatewords_html:"150" }}
+      </p>
+      <footer>
+        {% with hilight as object %}
+          {% include "includes/_tag_list.html" %}
+        {% endwith %}
+      </footer>
+      <a href="{% url article_detail hilight.title_slug %}" class="continue">Continue Freytag's pyramid</a>
+    </article>
+  {% endwith %}
+
+  {% for a in articles|slice:"1:6" %}
+    {% list_template a %}
+  {% endfor %}
+  
+{% endblock %}
+
+{% block sidebar %}
+  <section class="top-align">
+    <header>
+      <h3>{{ authors|length }} Author{{ authors|pluralize }}</h3>
+    </header>
+    <ul>
+      {% for a in authors|slice:"5" %}
+        <li><a href="{% url author_detail a.username %}">{{ a.first_name|default:"user" }} {{ a.last_name }}</a></li>
+      {% endfor %}
+      {% if authors|length > 5 %}
+        <li><a href="{% url author_list %}" class="more">and more...</a></li>
+      {% endif %}
+    </ul>
+  </section>
+  <section>
+    <header>
+      <h3>{{ techs|length }} Technologies</h3>
+    </header>
+    <ul>
+      {% for t in techs|slice:"5" %}
+        <li><a href="{% url article_list_tech t.name %}">{{ t.name }}</a></li>
+      {% endfor %}
+      {% if techs|length > 5 %}
+        <li><a href="{% url tech_list %}" class="more">and more...</a></li>
+      {% endif %}
+    </ul>
+  </section>
+{% endblock %}

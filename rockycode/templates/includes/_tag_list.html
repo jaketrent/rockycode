@@ -1,0 +1,9 @@
+{% load tagging_tags %}
+{% tags_for_object object as tag_list %}
+{% if tag_list %}
+  <ul class="tags">
+    {% for tag in tag_list %}
+        <li><a href="{% url article_list_tech tag.name %}" class="reg">{{ tag }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}

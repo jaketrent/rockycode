@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load flatpages %}
+  
+{% block title %}
+  {{ flatpage.title }}
+  -
+  {{ block.super }}
+{% endblock %}
+
+{% block main %}
+  {{ flatpage.content|restructuredtext }}
+{% endblock %}
+
+{% get_flatpages '/unit-testing-xquery/'as utx_flatpages %}
+{% block sidebar %}
+  <section>
+    <header>
+      <h3>Unit Testing Xquery</h3>
+    </header>
+    <ol>
+      {% for page in utx_flatpages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    {% endfor %}
+    </ol>
+  </section>
+{% endblock %}

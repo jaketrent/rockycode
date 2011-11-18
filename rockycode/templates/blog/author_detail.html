@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load blog_tags %}
+
+{% block author_tab %}active{% endblock %}
+
+{% block feeds %}
+  {{ block.super }}
+  <link rel="alternate" type="application/rss+xml" title="{{ author.username }} feed" href="/feeds/author/{{ author.username }}.rss" />
+{% endblock %}
+
+{% block logo %}
+  <a href="{% url home %}"><h2 id="logo">RockyCode</h2></a>
+{% endblock %}
+
+{% block main %}
+  <article>
+    <header>
+      <h1>{{ author.first_name|default:"user" }} {{ author.last_name }}</h1>
+    </header>
+    <img src="{{ author.get_profile.image_path }}" class="avatar" />
+    <p>
+      {{ author.get_profile.bio }}
+    </p>
+  </article>
+
+  <section class="links top-bump">
+    <header>
+      <h3>Latest Articles</h3>
+    </header>
+    <ul>
+    {% for a in articles %}
+      <li>
+        <a href="{% url article_detail a.title_slug %}">
+          {{ a.title }}
+        </a>
+    {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}
+
+{% block sidebar %}
+
+  <section>
+    <header>
+      <h3>Coding here</h3>
+    </header>
+    <ul>
+      <li>
+        <a href="http://www.history.com/this-day-in-history/{{ author.date_joined|date:"m" }}/{{ current_date|date:"d" }}?catId=1">
+          since {{ author.date_joined|date:"F Y" }}
+        </a>
+      </li>
+      {% if author.get_profile.location %}
+      <li>
+        <a href="http://maps.google.com/?q={{ author.get_profile.location }}">
+          from {{ author.get_profile.location }}
+        </a>
+      </li>
+      {% endif %}
+      
+      <li>
+        <a href="{% url article_list_author author.username %}">
+          creating {{ author.article_count }} article{{ author.article_count|pluralize }}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      <h3>Connect</h3>
+    </header>
+    <ul>
+      {% if author.get_profile.website %}
+        <li><a href="{{ author.get_profile.website }}" class="website" title="Website">Website</a></li>
+      {% endif %}
+      {% if author.get_profile.twitter %}
+        <li><a href="{{ author.get_profile.twitter }}" class="twitter" title="Twitter">Twitter</a></li>
+      {% endif %}
+      {% if author.get_profile.linkedin %}
+        <li><a href="{{ author.get_profile.linkedin }}" class="linkedin" title="LinkedIn">LinkedIn</a></li>
+      {% endif %}
+      {% if author.get_profile.google_chatback %}
+        <li><a href="{{ author.get_profile.google_chatback }}" class="gtalk" title="Chat with me" target="_blank">Google Chat</a></li>
+      {% endif %}
+      <li>
+        <a href="/feeds/author/{{ author.username }}.rss">Articles RSS</a>
+      </li>
+    </ul>
+  </section>
+
+{% endblock %}

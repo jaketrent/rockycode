@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load blog_tags %}
+{% load tagging_tags %}
+
+{% block article_tab %}active{% endblock %}
+
+{% block main %}
+  <ul>
+  {% for g in guides %}
+    <li>
+      <a href="{% url guide_detail g.title_slug %}">{{ g.title }}</a>
+      <p>
+        {{ g.description }}
+      </p>
+    </li>
+  {% endfor %}
+  </ul>
+  {% with guides as object %}
+    {% include "includes/_pagination.html" %}
+  {% endwith %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+  <section class="top-align">
+    <header>
+      <h3>About Guides</h3>
+    </header>
+    <p>
+      Guides are a collection of articles that provide a well-developed treatment to an interesting subject. They often
+      build upon one another in sequence. Guides often walk through a multi-faceted idea, thus they are best enjoyed as
+      an entire collection.
+    </p>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<article class="type-list type-blog">
+  <header>
+    <h2><a href="{% url article_detail object.title_slug %}">{{ object.title }}</a></h2>
+    <p>
+      posted by <a href="{% url article_list_author object.user.username %}">{{ object.user.first_name|default:"user" }}</a>
+      on <time datetime="{{ object.date_published|date:"Y-m-d"}}" pubdate="pubdate">{{ object.date_published|date:"d M Y" }}</time>
+    </p>
+  </header>
+  {{ object.summary|safe|linebreaks|truncatewords_html:"100" }}
+  <footer>
+    <a href="{% url article_detail object.title_slug %}" class="continue">Continue reading</a>
+    {% include "includes/_tag_list.html" %}
+  </footer>
+</article>

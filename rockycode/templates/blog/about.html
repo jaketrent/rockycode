@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block about_tab %}active{% endblock %}
+
+{% block main %}
+  <article>
+    <header>
+      <h2>Ah, fresh code.</h2>
+    </header>
+    <p>
+      RockyCode: the carton that never faileth, always burgeoning with fresh cream, teasing the coders'
+      taste buds with the wisdom of other software nuts and those that have grown mallowy middles as
+      a result of much toil in their own creameries of development.
+    </p>
+    <p>
+      Just as so many love the nuts and marshmallows and flowing chocolate of rockyroad ice cream,
+      we hope that our offerings here will also be especially delicious.  One might ask, "Why can't we
+      just have a salad or something?"  Do you really think you'll gain the essential nutrients
+      required for sufficiently awesome codes in a salad?  We need some serious ATP.
+    </p>
+    <p>
+      Give us a jingle if you'd like to speak your piece, order a carton, or contribute any of your
+      own fat of the land.
+    </p>
+    <p>
+      Enjoy the fresh ingredients, and never trust a water gypsy.
+    </p>
+  </article>
+{% endblock %}
+
+{% block sidebar %}
+
+  <section class="top-align">
+    <header>
+      <h3>Contact us</h3>
+    </header>
+    <ul>
+      <li><a href="http://www.twitter.com/rockycode">Tweet the tweeps</a></li>
+      <li><a href="{% url author_list %}">Chat the authors</a></li>
+      <li><a href="mailto:ala.rocky.code@gmail.com">Email the mothership</a></li>
+    </ul>
+  </section>
+
+{% endblock %}

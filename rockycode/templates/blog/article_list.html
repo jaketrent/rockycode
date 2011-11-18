@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load blog_tags %}
+{% load tagging_tags %}
+
+{% block article_tab %}active{% endblock %}
+
+{% block main %}
+  
+  {% if filter_item %}
+    <div class="filter">
+      <span>{{ articles.paginator.count }}</span> result{{ articles.object_list|pluralize }} for {{ filter_type }}, <span>{{ filter_item }}</span>...
+    </div>
+  {% endif %}
+  {% for a in articles.object_list %}
+    {% list_template a %}
+  {% endfor %}
+  {% with articles as object %}
+    {% include "includes/_pagination.html" %}
+  {% endwith %}
+
+{% endblock %}
+
+{% block sidebar %}
+
+  {% if filter_item %}
+    <a id="clear-filter" href="{% url article_list %}">(clear filter)</a>
+  {% endif %}
+
+  <section class="top-align">
+    <header>
+      <h3>Authors</h3>
+    </header>
+    <ul>
+      {% for a in authors %}
+        <li><a href="{% url article_list_author a.username %}">{{ a.first_name|default:"user" }} {{ a.last_name }}</a><span>{{ a.article_count }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      <h3>Technologies</h3>
+    </header>
+    <ul>
+      {% tags_for_model blog.Article as article_tags with counts %}
+      {% for t in article_tags %}
+        <li><a href="{% url article_list_tech t %}">{{ t }}</a><span>{{ t.count }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}
