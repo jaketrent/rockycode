@@ -1,5 +1,5 @@
 [
-  {
+  /*{
     "pk": 19, 
     "model": "contenttypes.contenttype", 
     "fields": {
@@ -133,7 +133,7 @@
       "name": "user", 
       "app_label": "auth"
     }
-  },
+  },*/
   {
     "pk": 1, 
     "model": "sites.site", 
