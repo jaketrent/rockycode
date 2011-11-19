@@ -9,14 +9,6 @@ a img {border:none;}
 ul, ol { margin: 0; padding: 0; }
 article, section, aside, hgroup, nav, header, footer, figure, figcaption { display: block; }
 
-@font-face {
-  font-family: 'NillandRegular';
-  src: url('../type/nilland-webfont.eot?') format('eot'),
-       url('../type/nilland-webfont.woff') format('woff'),
-       url('../type/nilland-webfont.ttf') format('truetype'),
-       url('../type/nilland-webfont.svg#webfontAO0mbKz9') format('svg');
-
-}
 body {
   color: #604429;
   background: #F7F3E8; /* old browsers */
@@ -29,12 +21,13 @@ body {
 p {
   font-size: 15px;
   line-height: 23px;
+  margin-bottom: 13px;
 }
 a, a:visited {
   color: #604429;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'NillandRegular', Georgia, serif;
+  font-family: 'Josefin Slab', Georgia, serif;
   text-shadow: 1px 1px 0px #ffffff;
   filter: dropshadow(color=#ffffff, offx=1, offy=1);
 }
@@ -86,7 +79,7 @@ header a {
 }
 #header nav ul li {
   float: left;
-  font-family: 'NillandRegular', Georgia, serif;
+  font-family: 'Josefin Slab', Georgia, serif;
   width: 140px;
   text-align: center;
   height: 114px;
@@ -215,7 +208,7 @@ header a {
   -o-transition: all .4s linear;
   transition: all .4s linear;
   color: #fff2e4;
-  font-family: 'NillandRegular', Georgia, serif;
+  font-family: 'Josefin Slab', Georgia, serif;
   text-decoration: none;
   font-size: 20px;
   height: 50px;
@@ -228,7 +221,7 @@ header a {
 }
 .continue {
   padding-top: 20px;
-  font-family: 'NillandRegular', Georgia, serif;
+  font-family: 'Josefin Slab', Georgia, serif;
   text-decoration: none;
   font-size: 20px;
 }
@@ -360,7 +353,7 @@ article.type-detail blockquote {
 
 .filter {
   margin-bottom: 53px;
-  font-family: 'NillandRegular', Georgia, serif;
+  font-family: 'Josefin Slab', Georgia, serif;
 }
 .filter span {
   font-size: 18px;
