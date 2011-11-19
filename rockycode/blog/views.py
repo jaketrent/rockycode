@@ -14,21 +14,21 @@ import datetime
 
 def home(request):
   articles = Article.objects.filter(active=True).order_by('-date_published')[:5]
-  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Max('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count","id")
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count","id")
   techs = Tag.objects.annotate(article_count=Count('items__id')).order_by("-article_count")
   return render_to_response("home.html", locals(),
                             context_instance=RequestContext(request))
 
 def article_list(request):
   articles = util.paginate(request, Article.objects.filter(active=True).order_by("-date_published"), 20)
-  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Max('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   return render_to_response("blog/article_list.html", locals(),
                             context_instance=RequestContext(request))
 
 def article_list_author(request, author_username):
   user = User.objects.filter(username=author_username)
   articles = util.paginate(request, Article.objects.filter(active=True, user=user).order_by("-date_published"), 20)
-  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Max('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "author"
   filter_item = "%s %s" % (user[0].first_name, user[0].last_name)
   return render_to_response("blog/article_list.html", locals(),
@@ -37,7 +37,7 @@ def article_list_author(request, author_username):
 def article_list_tech(request, filter_item):
   tag = Tag.objects.get(name=filter_item)
   articles = util.paginate(request, TaggedItem.objects.get_by_model(Article.objects.filter(active=True), tag).order_by("-date_published"))
-  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Max('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "technology"
   return render_to_response("blog/article_list.html", locals(),
                             context_instance=RequestContext(request))
@@ -50,7 +50,7 @@ def article_detail(request, slug):
                             context_instance=RequestContext(request))
 
 def author_list(request):
-  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Max('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count","id")
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count","id")
   return render_to_response("blog/author_list.html", locals(),
                             context_instance=RequestContext(request))
 
