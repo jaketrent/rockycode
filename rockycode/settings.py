@@ -2,11 +2,12 @@ import os
 
 PROJ_PATH = os.path.dirname(__file__)
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('Rockycode Admin', 'ala.rocky.code@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -29,7 +30,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Denver'
+TIME_ZONE = 'America/Boise'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
