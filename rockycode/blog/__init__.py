@@ -48,7 +48,7 @@ DEFAULT = HtmlFormatter(noclasses=INLINESTYLES)
 
 # Add name -> formatter pairs for every variant you want to use
 VARIANTS = {
-    # 'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
+  'linenos': HtmlFormatter(noclasses=INLINESTYLES, linenos=True),
 }
 
 
@@ -77,6 +77,11 @@ class Pygments(Directive):
         # take an arbitrary option if more than one is given
         formatter = self.options and VARIANTS[self.options.keys()[0]] or DEFAULT
         parsed = highlight(u'\n'.join(self.content), lexer, formatter)
+        parsed = '<div class="codeblock">%s</div>' % parsed
         return [nodes.raw('', parsed, format='html')]
 
 directives.register_directive('sourcecode', Pygments)
+
+# create an alias, so we can use it with rst2pdf... leave the other for
+# backwards compatibility
+directives.register_directive('code-block', Pygments)
