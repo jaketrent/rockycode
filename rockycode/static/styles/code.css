@@ -1,3 +1,7 @@
+tt, code, kbd, samp {
+  border: 1px solid rgba(96, 68, 41, .5);
+  padding: 2px 2px 0 2px;
+}
 .dsq-comment-message code,
 .codehilite, .codeblock, .source {
   display:block;
@@ -16,6 +20,7 @@
 .codeblock pre, .source pre, .codehilite pre {
   margin: 10px;
 }
+
 
 .hll { background-color: #ffffcc }
 .c { color: #408080; font-style: italic } /* Comment */
