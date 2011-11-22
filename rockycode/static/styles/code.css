@@ -1,5 +1,5 @@
 .dsq-comment-message code,
-.codeblock, .source {
+.codehilite, .codeblock, .source {
   display:block;
   white-space:pre;
   overflow: auto;

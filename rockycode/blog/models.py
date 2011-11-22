@@ -16,18 +16,20 @@ from django.core.urlresolvers import reverse
 
 MARKUP_HTML = 'h'
 MARKUP_REST = 'r'
-#MARKUP_MARKDOWN = 'm'
+MARKUP_MARKDOWN = 'm'
 #MARKUP_TEXTILE = 't'
 MARKUP_OPTIONS = getattr(settings, 'ARTICLE_MARKUP_OPTIONS', (
         (MARKUP_HTML, _('HTML/Plain Text')),
-        (MARKUP_REST, _('ReStructured Text')),
-#        (MARKUP_MARKDOWN, _('Markdown')),
+#        (MARKUP_REST, _('ReStructured Text')),
+        (MARKUP_MARKDOWN, _('Markdown')),
 #        (MARKUP_TEXTILE, _('Textile'))
     ))
-MARKUP_DEFAULT = getattr(settings, 'ARTICLE_MARKUP_DEFAULT', MARKUP_HTML)
+MARKUP_DEFAULT = getattr(settings, 'ARTICLE_MARKUP_DEFAULT', MARKUP_MARKDOWN)
 MARKUP_HELP = _("""Select the type of markup you are using in this article.
 <ul>
 <li><a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html" target="_blank">ReStructured Text Guide</a></li>
+<li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown Guide</a></li>
+<li><a href="http://www.freewisdom.org/projects/python-markdown/CodeHilite">Markdown Codeblocks Help</a></li>
 </ul>""")
 CHATBACK_HELP = _("""You can get the <a href="http://www.google.com/talk/service/badge/New">Google chatback code here</a>.""")
 #<li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown Guide</a></li>
@@ -104,8 +106,8 @@ class Article(models.Model):
     """
     if self.markup == MARKUP_REST:
       self.rendered_body = markup.restructuredtext(self.body)
-#    elif self.markup == MARKUP_MARKDOWN:
-#      self.rendered_body = markup.markdown(self.body)
+    elif self.markup == MARKUP_MARKDOWN:
+      self.rendered_body = markup.markdown(self.body, "codehilite")
 #    elif self.markup == MARKUP_TEXTILE:
 #      self.rendered_body = markup.textile(self.body)
     else:
@@ -114,7 +116,7 @@ class Article(models.Model):
     super(Article, self).save(*args, **kwargs)
 
   def get_rendered_body(self):
-    if self.markup == MARKUP_REST:
+    if self.markup != MARKUP_HTML:
       return self.rendered_body
     else:
       return rendercode(self.rendered_body)
