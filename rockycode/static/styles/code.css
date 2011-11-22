@@ -1,6 +1,7 @@
 tt, code, kbd, samp {
   border: 1px solid rgba(96, 68, 41, .5);
   padding: 2px 2px 0 2px;
+  background: rgba(255, 241, 199, .6);
 }
 .dsq-comment-message code,
 .codehilite, .codeblock, .source {
