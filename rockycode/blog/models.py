@@ -20,7 +20,7 @@ MARKUP_MARKDOWN = 'm'
 #MARKUP_TEXTILE = 't'
 MARKUP_OPTIONS = getattr(settings, 'ARTICLE_MARKUP_OPTIONS', (
         (MARKUP_HTML, _('HTML/Plain Text')),
-#        (MARKUP_REST, _('ReStructured Text')),
+        (MARKUP_REST, _('ReStructured Text')),
         (MARKUP_MARKDOWN, _('Markdown')),
 #        (MARKUP_TEXTILE, _('Textile'))
     ))
