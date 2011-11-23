@@ -64,7 +64,7 @@ STATIC_ROOT = '' #os.path.join(PROJ_PATH, "static")
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 
-STATIC_URL = '/static/' if DEBUG else'http://dl.dropbox.com/u/990505/rockycode-static/'
+STATIC_URL = '/static/' if DEBUG else 'http://dl.dropbox.com/u/990505/rockycode-static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.

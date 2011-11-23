@@ -1,12 +1,66 @@
-{% extends "base.html" %}
-
-{% block main %}
-
-<h1>500</h1>
-
-<p>
-  Sorry, the app just blew up. Admins have been notified. You could try what you just did again, but feel
-  free to break out of this infinite loop at any time.
-</p>
-
-{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}RockyCode - 500{% endblock %}</title>
+    <meta name="google-site-verification" content="GIr6E7I5vxdADELTGqs2Ln1EaD5rwBh3-sY5gWPZDQ4" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block styles %}
+      <link rel="stylesheet" href="http://dl.dropbox.com/u/990505/rockycode-static/styles/style-lrg.css" media="screen" />
+      <link rel="stylesheet" href="http://dl.dropbox.com/u/990505/rockycode-static/styles/style-med.css" media="screen and (max-width:1023px)" />
+      <link rel="stylesheet" href="http://dl.dropbox.com/u/990505/rockycode-static/styles/style-sm.css" media="screen and (max-width: 639px)" />
+      <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css' />
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      <header id="header">
+        {% block logo %}<a href="{% url home %}"><h1 id="logo">RockyCode</h1></a>{% endblock %}
+        <nav>
+          <ul>
+            <li><a href="{% url article_list %}" class="{% block article_tab %}{% endblock %}">Articles</a></li>
+            <li><a href="{% url author_list %}" class="{% block author_tab %}{% endblock %}">Authors</a></li>
+            <li><a href="{% url tech_list %}" class="{% block tech_tab %}{% endblock %}">Technologies</a></li>
+            <li><a href="{% url about %}" class="{% block about_tab %}{% endblock %}">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      {% block body %}
+        <div id="main" role="main">
+          <h1>500</h1>
+          <p>
+            Sorry, the app just blew up. Admins have been notified. You could try what you just did again, but feel
+            free to break out of this infinite loop at any time.
+          </p>
+        </div>
+      {% endblock %}
+      <footer id="footer">
+        {% block footer %}
+          <small>
+            &copy; 2011 RockyCode and participating authors
+          </small>
+          <nav>
+            &middot; <a href="{% url about %}">Site Policies</a>
+            &middot; <a href="{% url about %}">Contact</a>
+            &middot; <a href="{% url sitemap %}">Sitemap</a>
+          </nav>
+        {% endblock %}
+      </footer>
+    </div>
+    {% block scripts-bottom %}{% endblock %}
+    {% block analytics %}
+      <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+      try {
+      var pageTracker = _gat._getTracker("UA-16224416-1");
+      pageTracker._trackPageview();
+      } catch(err) {}</script>
+    {% endblock %}
+  </body>
+</html>
