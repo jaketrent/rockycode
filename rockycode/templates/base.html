@@ -12,7 +12,7 @@
       <meta name="Keywords" content="technology, development, dev, web development, computers, programming, software, software engineering, code, coding, ice cream" />
     {% endblock %}
     {% block feeds %}
-      <link rel="alternate" type="application/rss+xml" title="All articles feed" href="{% url feeds 'blog' %}" />      
+      <link rel="alternate" type="application/rss+xml" title="All articles feed" href="{% url feeds 'blog' %}" />
     {% endblock %}
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,6 +44,22 @@
         </div>
         <aside id="sidebar">
           {% block sidebar %}{% endblock %}
+          <section>
+            <!--<header>
+              <h3>Sponsors</h3>
+            </header>-->
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-0475153820653291";
+            /* Rockycode sidebar */
+            google_ad_slot = "2291646790";
+            google_ad_width = 300;
+            google_ad_height = 250;
+            //-->
+            </script>
+            <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+          </section>
         </aside>
       {% endblock %}
       <footer id="footer">
