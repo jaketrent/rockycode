@@ -6,16 +6,11 @@ from blog.views import *
 from blog.feeds import TechFeed, AuthorFeed, AllArticlesFeed
 from profiles import views as pv
 from django.core.urlresolvers import reverse
-from blog.models import ArticleSitemap
 
 feeds = {
   'tech': TechFeed,
   'author': AuthorFeed,
   'blog': AllArticlesFeed
-}
-
-sitemaps = {
-  'articles': ArticleSitemap,
 }
 
 urlpatterns = patterns('',
@@ -39,8 +34,6 @@ urlpatterns = patterns('',
   url(r'^feeds/(?P<url>.*)/$', feed, {'feed_dict': feeds}, name="feeds"),
   url(r'^feeds/(?P<url>.*)\.rss$', feed, {'feed_dict': feeds}, name='dyn-feeds'),
   
-  url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name="sitemap"),
-
   url(r'^blog/upload/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.UPLOAD_PATH}, name="upload_path"),
   url(r'^media/files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.UPLOAD_PATH}, name="upload_path")
 )

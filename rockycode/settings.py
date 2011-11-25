@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup', # rest requires python docutils
+    'django.contrib.sitemaps',
     'gunicorn',
     'tagging',
     'profiles',
