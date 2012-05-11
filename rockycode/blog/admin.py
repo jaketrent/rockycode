@@ -1,9 +1,21 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import User
 from blog.models import Article, Collection, Template
 from django.contrib.contenttypes.models import ContentType
+#
+#class ArticleForm(forms.ModelForm):
+#  class Meta:
+#    model = Article
+#    widgets = {
+#      'body' : forms.Textarea(attrs={'id':'epiceditor'})
+#    }
+#  class Media:
+#    js = ('scripts/epiceditor.js',)
+
 
 class ArticleAdmin(admin.ModelAdmin):
+#  form = ArticleForm
   list_display = ['title', 'id', 'date_published', 'date_created', 'date_updated', 'active', 'tags']
   prepopulated_fields = {'title_slug': ('title',)}
   search_fields = ['title','summary','body']
