@@ -3,19 +3,47 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from blog.models import Article, Collection, Template
 from django.contrib.contenttypes.models import ContentType
-#
-#class ArticleForm(forms.ModelForm):
-#  class Meta:
-#    model = Article
-#    widgets = {
-#      'body' : forms.Textarea(attrs={'id':'epiceditor'})
-#    }
-#  class Media:
-#    js = ('scripts/epiceditor.js',)
+from django.db import models
+from blog.widgets import EpicEditor
+from settings import STATIC_URL
+from django.utils.translation import ugettext_lazy as _
 
+BODY_HELP = _("""
+<style>
+  #id_body { display: none; }
+  #epiceditor {
+    min-width: 400px;
+    max-width: 620px;
+    height: 400px;
+    margin: -7px 0 0 105px;
+  }
+</style>
+<div id='epiceditor'></div>
+<script>
+django.jQuery(function () {
+  var editor = new EpicEditor(django.jQuery('#epiceditor')[0]);
+  editor.options({
+    basePath: '%s/epiceditor'
+  });
+  editor.load();
+
+  django.jQuery('.submit-row input[type=submit]').click(function () {
+    django.jQuery('#id_body').val(editor.get('editor').value);
+  });
+
+});
+</script>
+
+""")
+
+class ArticleForm(forms.ModelForm):
+  body = forms.CharField(widget=EpicEditor(), help_text=(BODY_HELP % STATIC_URL))
+
+  class Meta:
+    model = Article
 
 class ArticleAdmin(admin.ModelAdmin):
-#  form = ArticleForm
+  form = ArticleForm
   list_display = ['title', 'id', 'date_published', 'date_created', 'date_updated', 'active', 'tags']
   prepopulated_fields = {'title_slug': ('title',)}
   search_fields = ['title','summary','body']

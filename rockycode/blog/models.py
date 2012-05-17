@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from tagging_autocomplete.models import TagAutocompleteField
 from settings import PROJ_PATH
-import blog.models
 import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.markup.templatetags import markup
@@ -13,7 +12,6 @@ from django.utils.html import linebreaks
 from blog.code import rendercode
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
-from rockycode.blog.widgets import EpicEditor
 from django.contrib.admin.widgets import AdminTextareaWidget
 
 MARKUP_HTML = 'h'
@@ -34,20 +32,9 @@ MARKUP_HELP = _("""Select the type of markup you are using in this article.
 <li><a href="http://www.freewisdom.org/projects/python-markdown/CodeHilite">Markdown Codeblocks Help</a></li>
 </ul>""")
 CHATBACK_HELP = _("""You can get the <a href="http://www.google.com/talk/service/badge/New">Google chatback code here</a>.""")
+BODY_HELP = "query, <span id='epiceditor'>asdf</span>"
 #<li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown Guide</a></li>
 #<li><a href="http://thresholdstate.com/articles/4312/the-textile-reference-manual" target="_blank">Textile Guide</a></li>
-
-# The following code is based on models.py file from django-tinymce by Joost Cassee
-class EpicEditorField(models.TextField):
-  def formfield(self, **kwargs):
-    defaults = {'widget': EpicEditor}
-    defaults.update(kwargs)
-
-    # As an ugly hack, we override the admin widget
-    if defaults['widget'] == AdminTextareaWidget:
-      defaults['widget'] = EpicEditor
-
-    return super(EpicEditorField, self).formfield(**defaults)
 
 class Template(models.Model):
 	title = models.CharField(max_length=250)
@@ -80,7 +67,7 @@ class Article(models.Model):
   title = models.CharField(max_length=250)
   title_slug = models.SlugField(unique=True)
   summary = models.TextField(max_length=1000, blank=True, null=True)
-  body = EpicEditorField(blank=True, null=True)
+  body = models.TextField(blank=True, null=True)
   rendered_body = models.TextField(blank=True, null=True)
   markup = models.CharField(max_length=1, choices=MARKUP_OPTIONS, default=MARKUP_DEFAULT, help_text=MARKUP_HELP)
   collection = models.ForeignKey(Collection)
