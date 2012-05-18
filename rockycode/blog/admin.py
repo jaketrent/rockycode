@@ -26,9 +26,11 @@ django.jQuery(function () {
     basePath: '%s/epiceditor'
   });
   editor.load();
+  editor.get('editor').value = django.jQuery('#id_body').val();
 
   django.jQuery('.submit-row input[type=submit]').click(function () {
     django.jQuery('#id_body').val(editor.get('editor').value);
+    editor.remove('epiceditor');
   });
 
 });
