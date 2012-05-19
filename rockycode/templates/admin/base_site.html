@@ -3,9 +3,38 @@
 
 {% block title %}{{ title }} | {% trans 'RockyCode' %}{% endblock %}
 
+{% block extrastyle %}
+<style>
+  body {
+    background: #F7F3E8 !important; /* old browsers */
+    background: -moz-linear-gradient(top, #F7F3E8 0%, #FCF1DB 40%, #F7E3BB 100%) fixed !important; /* firefox */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F7F3E8), color-stop(40%,#FCF1DB), color-stop(100%,#F7E3BB)) fixed !important; /* webkit */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7F3E8', endColorstr='#F7E3BB',GradientType=0 ) !important; /* ie */
+    background: -o-linear-gradient(top, #F7F3E8 0%,#FCF1DB 40%,#F7E3BB 100%) fixed !important; /* opera */
+  }
+  #site-name img {
+    height: 25px;
+  }
+  #header {
+    background: #604429;
+    border-bottom: solid 3px #a87848;
+  }
+  #branding h1 {
+    color: #fff;
+  }
+  .module h2, .module caption, .inline-group h2 {
+    background:#ccc url({{ STATIC_URL }}admin/img/admin/nav-bg.gif) bottom left repeat-x;
+    color: #604429;
+  }
+  a.section:link, a.section:visited {
+    color: #604429;
+  }
+</style>
+{% endblock %}
+
 {% block branding %}
 <h1 id="site-name">
-  <img src="{{ STATIC_URL }}images/title-med.png" style="height:25px;"/></h1>
+  <img src="{{ STATIC_URL }}images/title-med.png" /></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}
