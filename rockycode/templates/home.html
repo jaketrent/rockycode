@@ -31,7 +31,7 @@
     {% list_template a %}
   {% endfor %}
 
-  <a href="{% url article_list %}" class="continue">Rack up more surf time on tasty articles...</a>
+  <a href="{% url article_list %}" class="continue">Rack up more surf time on {{ articles|length }} tasty articles...</a>
   
 {% endblock %}
 
