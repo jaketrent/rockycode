@@ -9,7 +9,7 @@
   {{ object.summary|safe|linebreaks }}
   {% if object.demo or object.source or object.source_path %}
     <section class="two-btn demo">
-      {% if object.demo %}<a href="{% url upload_path object.demo %}">Demo</a>{% endif %}
+      {% if object.demo %}<a href="{{ object.demo }}">Demo</a>{% endif %}
       {% if object.source %}<a href="{{ object.source.url }}">Source</a>{% endif %}
       {% if object.source_path %}<a href="{{ object.source_path }}">Source</a>{% endif %}
     </section>
