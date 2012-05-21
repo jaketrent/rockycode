@@ -31,7 +31,6 @@ MARKUP_HELP = _("""Select the type of markup you are using in this article.
 <li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown Guide</a></li>
 <li><a href="http://www.freewisdom.org/projects/python-markdown/CodeHilite">Markdown Codeblocks Help</a></li>
 </ul>""")
-CHATBACK_HELP = _("""You can get the <a href="http://www.google.com/talk/service/badge/New">Google chatback code here</a>.""")
 BODY_HELP = "query, <span id='epiceditor'>asdf</span>"
 #<li><a href="http://daringfireball.net/projects/markdown/basics" target="_blank">Markdown Guide</a></li>
 #<li><a href="http://thresholdstate.com/articles/4312/the-textile-reference-manual" target="_blank">Textile Guide</a></li>
@@ -136,7 +135,7 @@ class Profile(models.Model):
   website = models.CharField(max_length=250, blank=True, null=True)
   linkedin = models.CharField(max_length=250, blank=True, null=True)
   twitter = models.CharField(max_length=250, blank=True, null=True)
-  google_chatback = models.CharField(max_length=1000, blank=True, null=True, help_text=CHATBACK_HELP)
+  google_chatback = models.CharField(max_length=1000, blank=True, null=True)
 
   def __unicode__(self):
     return u'%s' % (self.user)

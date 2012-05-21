@@ -82,7 +82,7 @@
         <li><a href="{{ author.get_profile.linkedin }}" class="linkedin" title="LinkedIn">LinkedIn</a></li>
       {% endif %}
       {% if author.get_profile.google_chatback %}
-        <li><a href="{{ author.get_profile.google_chatback }}" class="gtalk" title="Chat with me" target="_blank">Google Chat</a></li>
+        <li><a href="{{ author.get_profile.google_chatback }}?rel=author" class="gplus" title="Google Plus">Google+</a></li>
       {% endif %}
       <li>
         <a href="/feeds/author/{{ author.username }}.rss">Articles RSS</a>
