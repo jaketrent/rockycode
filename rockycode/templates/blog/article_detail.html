@@ -57,20 +57,8 @@
 {% endblock %}
 
 {% block sidebar %}
-  {% with article.user.get_profile as author %}
-    <section class="author top-bump">
-      <header>
-        <h3>About {{ article.user.first_name }} {{ article.user.last_name }}</h3>
-      </header>
-      {% if author.image_path %}
-        <img class="avatar" src="{{ author.image_path }}" />
-      {% endif %}
-      {{ author.bio|safe|linebreaks|truncatewords_html:"40" }}
-      <a href="{% url author_detail article.user.username %}" class="continue">See profile</a>
-    </section>
-  {% endwith %}
 
-  <section class="techs">
+  <section class="techs top-bump">
     <header>
       <h3>Technologies</h3>
     </header>

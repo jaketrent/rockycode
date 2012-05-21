@@ -16,12 +16,25 @@
   {% endif %}
   {{ object.get_rendered_body|safe }}
   <footer>
-    <section class="two-btn share">
+    <section class="two-btn meta">
       <header>
         <h3>Share the delectableness</h3>
       </header>
       <a href="http://twitter.com/home?status=Slurp up the delectableness of RockyCode: {{ object.get_url }}" class="twitter">Twitter</a>
       <a href="http://www.facebook.com/sharer.php?u={{ object.get_url }}&t={{ object.title }}" class="facebook">Facebook</a>
     </section>
+
+    {% with object.user.get_profile as author %}
+      <section class="meta author">
+        <header>
+          <h3>About {{ author.user.first_name }} {{ author.user.last_name }}</h3>
+        </header>
+        {% if author.image_path %}
+        <img class="avatar" src="{{ author.image_path }}" />
+        {% endif %}
+        {{ author.bio|safe|truncatewords_html:"100" }} <a href="{% url author_detail author.user.username %}" class="continue">Check his dossier</a>
+      </section>
+    {% endwith %}
+
   </footer>
 </article>
