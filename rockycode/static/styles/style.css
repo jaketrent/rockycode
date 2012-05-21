@@ -304,21 +304,6 @@ article.type-detail header h1 {
 article.type-detail header p {
   margin-top: 0px;
 }
-article.type-detail .meta h3 {
-  font-size: 26px;
-}
-article.type-detail .author {
-  padding: 13px 25px 29px 25px;
-  font-size: .9em;
-  border-top: 5px solid rgba(96, 68, 41, .5);
-  border-bottom: 1px dotted #604429;
-  background: rgba(255, 255, 255, .7);
-}
-article.type-detail .author .continue {
-  font-size: inherit;
-  padding-left: 5px;
-}
-
 article.type-detail h1 {
   font-size: 24px;
   margin-top: 30px;
@@ -348,6 +333,52 @@ article.type-detail ul, article.type-detail ol {
 }
 article.type-detail blockquote {
   margin: 20px;
+}
+
+article.type-detail .meta h3 {
+  font-size: 26px;
+}
+article.type-detail .author {
+  padding: 13px 25px 29px 25px;
+  font-size: .9em;
+  border-top: 5px solid rgba(96, 68, 41, .5);
+  border-bottom: 1px dotted #604429;
+  background: rgba(255, 255, 255, .7);
+}
+article.type-detail .author .continue {
+  font-size: inherit;
+  padding-left: 5px;
+}
+.social {
+  margin: 10px 0 0 0 !important;
+  overflow: auto;
+}
+.social li {
+  float: left;
+}
+.social a {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 0 2px 0 0;
+  text-indent: -2000em;
+  background-image: url(../images/social-24.png);
+  background-repeat: no-repeat;
+}
+.social a.rss {
+  background-position: -48px 0;
+}
+.social a.linkedin {
+  background-position: -72px 0;
+}
+.social a.gplus {
+  background-position: 0 0;
+}
+.social a.twitter {
+  background-position: -24px 0;
+}
+.social a.facebook {
+  background-position: -96px 0;
 }
 
 .filter {
