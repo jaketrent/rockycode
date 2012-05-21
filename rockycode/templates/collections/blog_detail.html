@@ -27,17 +27,14 @@
     {% with object.user.get_profile as author %}
       <section class="meta author">
         <header>
-          <h3>About {{ author.user.first_name }} {{ author.user.last_name }}</h3>
+          <h3><a href="{% url author_detail author.user.username %}">About {{ author.user.first_name }} {{ author.user.last_name }}</a></h3>
         </header>
         {% if author.image_path %}
-        <img class="avatar" src="{{ author.image_path }}" />
+        <a href="{% url author_detail author.user.username %}"><img class="avatar" src="{{ author.image_path }}" /></a>
         {% endif %}
         {{ author.bio|safe|truncatewords_html:"100" }}
         <a href="{% url author_detail author.user.username %}" class="continue">More by {{ author.user.first_name }}</a>
         <ul class="social">
-          <li>
-            <a class="rss" href="/feeds/author/{{ author.user.username }}.rss">Articles RSS</a>
-          </li>
           {% if author.twitter %}
             <li>
               <a class="twitter" href="https://twitter.com/intent/user?screen_name={{ author.twitter }}">Twitter</a>
@@ -53,6 +50,9 @@
               <a class="linkedin" href="{{ author.linkedin }}">LinkedIn</a>
             </li>
           {% endif %}
+          <li>
+            <a class="rss" href="/feeds/author/{{ author.user.username }}.rss">Articles RSS</a>
+          </li>
         </ul>
       </section>
     {% endwith %}
