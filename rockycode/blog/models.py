@@ -139,7 +139,7 @@ class Profile(models.Model):
   google_chatback = models.CharField(max_length=1000, blank=True, null=True, help_text=CHATBACK_HELP)
 
   def __unicode__(self):
-    return u'%s' % (self.name)
+    return u'%s' % (self.user)
 
   def get_absolute_url(self):
     return ('profiles_profile_detail', (), { 'username': self.user.username })

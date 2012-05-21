@@ -7,6 +7,7 @@ from django.db import models
 from blog.widgets import EpicEditor
 from settings import STATIC_URL
 from django.utils.translation import ugettext_lazy as _
+from rockycode.blog.models import Profile
 
 BODY_HELP = _("""
 <style>
@@ -101,8 +102,13 @@ class ContentTypeAdmin(admin.ModelAdmin):
     }),
   )
 
+class ProfileAdmin(admin.ModelAdmin):
+  pass
+
+
 
 admin.site.register(ContentType, ContentTypeAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Collection, CollectionAdmin)
 admin.site.register(Template, TemplateAdmin)
+admin.site.register(Profile, ProfileAdmin)
