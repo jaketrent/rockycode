@@ -7,6 +7,7 @@
 <img src="{{ user.get_profile.image_path }}" />
 
 <form method="POST" action="">
+  {% csrf_token %}
  {% for field in form %}
      <dl>
        <dt>{{ field.label_tag }}</dt>
