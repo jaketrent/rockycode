@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     (r'^', include('blog.urls')),
     (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '%simages/favicon.ico' % STATIC_URL}),
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
-    (r'^profile/', include('profiles.urls'), {'success_url': '/authors/'}),
+    (r'^profile/', include('profiles.urls'), {'success_url': '/profile/edit/'}),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
 
