@@ -1,29 +1,46 @@
-{% extends "base.html" %}
+{% extends "admin/change_form.html" %}
+
 {% block title %}Edit Profile{% endblock %}
 
-{% block body %}
-<h1>Edit contact info for {{ user }} </h1>
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+  <a href="/admin/">Home</a> &rsaquo;
+  Edit Profile
+</div>
+{% endif %}{% endblock %}
 
-<img src="{{ user.get_profile.image_path }}" />
 
+{% block content %}
 <form method="POST" action="">
   {% csrf_token %}
- {% for field in form %}
-     <dl>
-       <dt>{{ field.label_tag }}</dt>
-       <dd>
-         {% if field.errors %}
-           <p class="error">{{ field.errors }}</p>
-         {% endif %}
-         {{ field }}
-         {% if field.help_text %}
-          {{ field.help_text|safe }}
-         {% endif %}
-       </dd>
-     </dl>
- {% endfor %}
- <input type="submit" name="submit" value="Edit" id="submit">
+  <div>
+    <fieldset class="module aligned ">
+      <h2>Contributor Profile for {{ user.first_name }} {{ user.last_name }}</h2>
+      {% if user.get_profile.image_path %}
+      <div class="form-row">
+        <label>Current Image</label>
+        <img src="{{ user.get_profile.image_path }}" />
+      </div>
+      {% endif %}
+      {% for field in form %}
+      <div class="form-row">
+        <div>
+          <label>{{ field.label_tag }}</label>
+          {% if field.errors %}
+            <p class="error">{{ field.errors }}</p>
+          {% endif %}
+          {{ field }}
+          {% if field.help_text %}
+            {{ field.help_text|safe }}
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </fieldset>
+    <div class="submit-row">
+      <input type="submit" name="submit" value="Save" id="submit" class="default" />
+    </div>
+  </div>
 </form>
 
-
-{% endblock body %}
+{% endblock %}
