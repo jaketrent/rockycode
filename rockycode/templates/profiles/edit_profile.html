@@ -4,7 +4,7 @@
 {% block body %}
 <h1>Edit contact info for {{ user }} </h1>
 
-<img src="{{ user.get_profile.image_path }})" />
+<img src="{{ user.get_profile.image_path }}" />
 
 <form method="POST" action="">
  {% for field in form %}
