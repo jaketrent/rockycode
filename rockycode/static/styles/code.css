@@ -21,6 +21,15 @@ tt, code, kbd, samp {
   margin: 10px;
 }
 
+@media screen and (max-width: 639px) {
+  .dsq-comment-message code,
+  .codehilite, .codeblock, .source {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
 
 .hll { background-color: #ffffcc }
 .c { color: #408080; font-style: italic } /* Comment */
