@@ -35,7 +35,7 @@ def article_list_author(request, author_username):
                             context_instance=RequestContext(request))
 
 def article_list_tech(request, filter_item):
-  tag = Tag.objects.get(name=filter_item)
+  tag = get_object_or_404(Tag, name = filter_item)
   articles = util.paginate(request, TaggedItem.objects.get_by_model(Article.objects.filter(active=True), tag).order_by("-date_published"))
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "technology"
