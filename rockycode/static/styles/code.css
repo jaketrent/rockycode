@@ -13,7 +13,6 @@ tt, code, kbd, samp {
   -moz-box-shadow: 1px 1px 0px #ffffff, 2px 2px 0px #604429;
   box-shadow: 1px 1px 0px #ffffff, 2px 2px #604429;
   font-size: 13px;
-  max-height: 600px;
   font-family: "Courier New", Courier, monospace;
   margin: 20px 0px;
   background: rgb(255, 241, 199);
