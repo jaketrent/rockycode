@@ -6,25 +6,21 @@
 {% block article_tab %}active{% endblock %}
 
 {% block main %}
-  
-  {% if filter_item %}
-    <div class="filter">
-      <span>{{ articles.paginator.count }}</span> result{{ articles.object_list|pluralize }} for {{ filter_type }}, <span>{{ filter_item }}</span>...
-    </div>
-  {% endif %}
   {% for a in articles.object_list %}
     {% list_template a %}
   {% endfor %}
   {% with articles as object %}
     {% include "includes/_pagination.html" %}
   {% endwith %}
-
 {% endblock %}
 
 {% block sidebar %}
 
   {% if filter_item %}
-    <a id="clear-filter" href="{% url article_list %}">(clear filter)</a>
+    <div class="filter">
+      <span>{{ articles.paginator.count }}</span> result{{ articles.object_list|pluralize }} for {{ filter_type }}, <span>{{ filter_item }}</span>...
+      <a id="clear-filter" href="{% url article_list %}">(clear filter)</a>
+    </div>
   {% endif %}
 
   <section class="top-align">

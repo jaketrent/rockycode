@@ -386,10 +386,7 @@ article.type-detail .author .continue {
   font-family: 'Josefin Slab', Georgia, serif;
 }
 .filter span {
-  font-size: 18px;
-}
-.filter span:last-child {
-  text-decoration: underline;
+  font-size: 28px;
 }
 
 #authors {
