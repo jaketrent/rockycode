@@ -18,7 +18,7 @@ class TagAutocomplete(Input):
 		    'all': ('%s/jquery.autocomplete.css' % js_base_url,)
 		}
 		js = (
-      '%s/lib/jquery.js' % js_base_url,
+      'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',
       '%s/jquery.autocomplete.js' % js_base_url,
     )
 
