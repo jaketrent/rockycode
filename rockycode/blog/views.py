@@ -74,8 +74,9 @@ def tech_list(request):
 
 def author_detail(request, username):
   try:
-    author = User.objects.annotate(article_count=Count('article__id')).get(username=username)
-    articles = Article.objects.filter(active=True, user=author).order_by("-date_published")[:9]
+    author = User.objects.annotate(article_count=Count('article__active')).get(username=username)
+    articles = Article.objects.filter(active=True, user=author).order_by("-date_published")
+    article_count = len(articles)
     current_date = datetime.date.today()
   except User.DoesNotExist:
       raise Http404

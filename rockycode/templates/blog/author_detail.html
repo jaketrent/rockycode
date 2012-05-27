@@ -28,7 +28,7 @@
       <h3>Latest Articles</h3>
     </header>
     <ul>
-    {% for a in articles %}
+    {% for a in articles|slice:":9" %}
       <li>
         <a href="{% url article_detail a.title_slug %}">
           {{ a.title }}
@@ -61,7 +61,7 @@
       
       <li>
         <a href="{% url article_list_author author.username %}">
-          creating {{ author.article_count }} article{{ author.article_count|pluralize }}
+          creating {{ article_count }} article{{ article_count|pluralize }}
         </a>
       </li>
     </ul>
