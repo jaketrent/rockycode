@@ -1,4 +1,5 @@
 import os
+from datetime import date
 
 PROJ_PATH = os.path.dirname(__file__)
 
@@ -163,6 +164,7 @@ FORCE_LOWERCASE_TAGS=True
 MAX_TAG_LENGTH=20
 
 UPLOAD_PATH="files/"
+SITE_START_DATE = date(2008, 8, 26)
 
 try:
   if os.environ.has_key('SENDGRID_USERNAME') and os.environ.has_key('SENDGRID_PASSWORD'):

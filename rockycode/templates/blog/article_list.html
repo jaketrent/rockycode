@@ -5,6 +5,27 @@
 
 {% block article_tab %}active{% endblock %}
 
+{% block scripts %}
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages:["imagesparkline"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable({{ months }});
+      var chart = new google.visualization.ImageSparkLine(document.getElementById('chart'));
+      chart.draw(data, {
+        width:270,
+        height:100,
+        showAxisLines:false,
+        showValueLabels:false,
+        labelPosition:'none',
+        color:'#604429',
+        fill: true
+      });
+    }
+  </script>
+{% endblock %}
+
 {% block main %}
   {% for a in articles.object_list %}
     {% list_template a %}
@@ -21,6 +42,7 @@
       <span>{{ articles.paginator.count }}</span> result{{ articles.object_list|pluralize }} for {{ filter_type }}, <span>{{ filter_item }}</span>...
       <a id="clear-filter" href="{% url article_list %}">(clear filter)</a>
     </div>
+    <div id="chart"></div>
   {% endif %}
 
   <section class="top-align">

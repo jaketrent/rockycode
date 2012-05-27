@@ -11,6 +11,7 @@ import settings
 from blog import util
 from django.views.generic.simple import direct_to_template
 import datetime
+from dateutil.relativedelta import relativedelta
 
 def home(request):
   articles = Article.objects.filter(active=True).order_by('-date_published')[:5]
@@ -27,7 +28,13 @@ def article_list(request):
 
 def article_list_author(request, author_username):
   user = User.objects.filter(username=author_username)
-  articles = util.paginate(request, Article.objects.filter(active=True, user=user).order_by("-date_published"), 20)
+  rawArticles = Article.objects.filter(active=True, user=user).order_by("-date_published")
+  articles = util.paginate(request, rawArticles, 20)
+  site_start_date = getattr(settings, 'SITE_START_DATE')
+  months = [[0]] * util.months_from_date(datetime.date.today(), site_start_date)
+  for art in rawArticles:
+    indx = util.months_from_date(art.date_published, site_start_date)
+    months[indx] = [months[indx][0] + 1]
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "author"
   filter_item = "%s %s" % (user[0].first_name, user[0].last_name)
@@ -36,7 +43,13 @@ def article_list_author(request, author_username):
 
 def article_list_tech(request, filter_item):
   tag = get_object_or_404(Tag, name = filter_item)
-  articles = util.paginate(request, TaggedItem.objects.get_by_model(Article.objects.filter(active=True), tag).order_by("-date_published"))
+  rawArticles = TaggedItem.objects.get_by_model(Article.objects.filter(active=True), tag).order_by("-date_published")
+  articles = util.paginate(request, rawArticles)
+  site_start_date = getattr(settings, 'SITE_START_DATE')
+  months = [[0]] * util.months_from_date(datetime.date.today(), site_start_date)
+  for art in rawArticles:
+    indx = util.months_from_date(art.date_published, site_start_date)
+    months[indx] = [months[indx][0] + 1]
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "technology"
   return render_to_response("blog/article_list.html", locals(),

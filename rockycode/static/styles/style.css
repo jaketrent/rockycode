@@ -388,6 +388,13 @@ article.type-detail .author .continue {
 .filter span {
   font-size: 28px;
 }
+#chart table {
+  width: 100%;
+  border: 1px solid #604429;
+}
+#chart img {
+  width: 100%;
+}
 
 #authors {
   list-style: none;
