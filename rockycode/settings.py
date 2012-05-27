@@ -165,7 +165,7 @@ MAX_TAG_LENGTH=20
 
 UPLOAD_PATH="files/"
 SITE_START_DATE = date(2008, 8, 26)
-TAGGING_AUTOCOMPLETE_JS_BASE_URL = STATIC_URL + "jquery-autocomplete"
+TAGGING_AUTOCOMPLETE_JS_BASE_URL = '/static/jquery-autocomplete/' if DEBUG else 'http://dl.dropbox.com/u/990505/rockycode-static/jquery-autocomplete/'
 
 try:
   if os.environ.has_key('SENDGRID_USERNAME') and os.environ.has_key('SENDGRID_PASSWORD'):
