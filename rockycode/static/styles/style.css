@@ -295,6 +295,9 @@ article.type-list footer {
 article.type-list .continue {
   font-size: 15px;
 }
+article.type-list ul {
+  list-style: inside;
+}
 
 
 article.type-detail header h1 {
