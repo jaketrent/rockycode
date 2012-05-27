@@ -187,9 +187,6 @@ header a {
   text-align: right;
 }
 
-.tags {
-  list-style: none;
-}
 .avatar {
   float: left;
   margin: 6px 10px 0px 0px;
@@ -351,6 +348,10 @@ article.type-detail .author {
 article.type-detail .author .continue {
   font-size: inherit;
   padding-left: 5px;
+}
+
+.tags {
+  list-style: none;
 }
 .social {
   margin: 10px 0 0 0 !important;
