@@ -6,3 +6,4 @@ django-tagging==0.3.1
 Pygments==1.4
 Markdown==2.0.3
 docutils==0.8.1
+dateutils==0.5.1
