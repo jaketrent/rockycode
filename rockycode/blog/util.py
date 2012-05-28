@@ -20,8 +20,15 @@ def months_from_date(date1, date2):
 
 def get_monthly_activity(articles):
   site_start_date = getattr(settings, 'SITE_START_DATE')
-  months = [[0]] * months_from_date(datetime.date.today(), site_start_date)
+  max_months = months_from_date(datetime.date.today(), site_start_date)
+  months = [[0]] * max_months
   for art in articles:
-    indx = months_from_date(art.date_published, site_start_date)
+    months_from_start = months_from_date(art.date_published, site_start_date)
+    if (months_from_start >= max_months):
+      indx = max_months - 1
+    elif (months_from_start < 0):
+      indx = 0
+    else:
+      indx = months_from_start
     months[indx] = [months[indx][0] + 1]
   return months
