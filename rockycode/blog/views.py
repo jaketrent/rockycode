@@ -12,6 +12,7 @@ from blog import util
 from django.views.generic.simple import direct_to_template
 import datetime
 from dateutil.relativedelta import relativedelta
+from rockycode.blog.search import get_query
 
 def home(request):
   articles = Article.objects.filter(active=True).order_by('-date_published')[:5]
@@ -92,4 +93,16 @@ def guide_article_detail(request, guide_slug, article_slug):
   disqus_forum = getattr(settings, 'DISQUS_FORUM', 'rockycode')
   disqus_dev = getattr(settings, 'DISQUS_DEV', '0')
   return render_to_response("blog/guide_article_detail.html", locals(),
+                            context_instance=RequestContext(request))
+
+def search(request):
+  q = ''
+  articles = None
+  if ('q' in request.GET) and request.GET['q'].strip():
+    q = request.GET['q']
+    entry_query = get_query(q, ['title', 'summary', 'body', 'user__username', 'user__first_name', 'user__last_name', 'tags'])
+    rawArticles = Article.objects.filter(entry_query, active=True).order_by('-date_published')
+    articles = util.paginate(request, rawArticles)
+    months = util.get_monthly_activity(rawArticles)
+  return render_to_response('blog/search_results.html', locals(),
                             context_instance=RequestContext(request))

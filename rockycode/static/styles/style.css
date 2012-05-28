@@ -396,6 +396,13 @@ article.type-detail aside {
   background-position: -96px 0;
 }
 
+.search {
+  width: 100%;
+  font-size: 2em;
+  font-family: 'Josefin Slab', Georgia, serif;
+  color: #604429;
+  margin-bottom: 20px;
+}
 .filter {
   margin-bottom: 53px;
   font-family: 'Josefin Slab', Georgia, serif;
