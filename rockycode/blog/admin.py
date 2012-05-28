@@ -47,7 +47,7 @@ class ArticleForm(forms.ModelForm):
 
 class ArticleAdmin(admin.ModelAdmin):
   form = ArticleForm
-  list_display = ['title', 'id', 'date_published', 'date_created', 'date_updated', 'active', 'tags']
+  list_display = ['title', 'id', 'date_published', 'active', 'tags']
   prepopulated_fields = {'title_slug': ('title',)}
   search_fields = ['title','summary','body']
   date_hierarchy = 'date_published'
