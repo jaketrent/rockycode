@@ -164,7 +164,7 @@ FORCE_LOWERCASE_TAGS=True
 MAX_TAG_LENGTH=20
 
 UPLOAD_PATH="files/"
-SITE_START_DATE = date(2008, 8, 26)
+SITE_START_DATE = date(2008, 8, 24)
 TAGGING_AUTOCOMPLETE_JS_BASE_URL = '/static/jquery-autocomplete/' if DEBUG else 'http://dl.dropbox.com/u/990505/rockycode-static/jquery-autocomplete/'
 
 try:
