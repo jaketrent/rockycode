@@ -76,14 +76,16 @@
 
   <section>
     <header>
-      <h3>Technologies</h3>
+      <h3>Top Technologies</h3>
     </header>
-    <ul>
-      {% tags_for_model blog.Article as article_tags with counts %}
-      {% for t in article_tags %}
-        <li><a href="{% url article_list_tech t %}">{{ t }}</a><span>{{ t.count }}</span></li>
+    <ol>
+      {% for t in top_techs %}
+      <li>
+        <a href="{% url article_list_tech t.name %}">{{ t.name }}</a>
+        <span>{{ t.article_count }}</span>
+      </li>
       {% endfor %}
-    </ul>
+    </ol>
   </section>
 
 {% endblock %}

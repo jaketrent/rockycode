@@ -24,6 +24,7 @@ def home(request):
 def article_list(request):
   articles = util.paginate(request, Article.objects.filter(active=True).order_by("-date_published"), 20)
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
+  top_techs = Tag.objects.annotate(article_count=Count('items__id')).order_by("-article_count")[:10]
   return render_to_response("blog/article_list.html", locals(),
                             context_instance=RequestContext(request))
 
@@ -36,6 +37,7 @@ def article_list_author(request, author_username):
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "author"
   filter_item = "%s %s" % (user[0].first_name, user[0].last_name)
+  top_techs = Tag.objects.annotate(article_count=Count('items__id')).order_by("-article_count")[:10]
   return render_to_response("blog/article_list.html", locals(),
                             context_instance=RequestContext(request))
 
@@ -46,6 +48,7 @@ def article_list_tech(request, filter_item):
   months = util.get_monthly_activity(rawArticles)
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "technology"
+  top_techs = Tag.objects.annotate(article_count=Count('items__id')).order_by("-article_count")[:10]
   return render_to_response("blog/article_list.html", locals(),
                             context_instance=RequestContext(request))
 
@@ -104,5 +107,7 @@ def search(request):
     rawArticles = Article.objects.filter(entry_query, active=True).order_by('-date_published')
     articles = util.paginate(request, rawArticles)
     months = util.get_monthly_activity(rawArticles)
+  authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
+  top_techs = Tag.objects.annotate(article_count=Count('items__id')).order_by("-article_count")[:10]
   return render_to_response('blog/search_results.html', locals(),
                             context_instance=RequestContext(request))

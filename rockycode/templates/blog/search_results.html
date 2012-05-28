@@ -66,4 +66,29 @@
     <div id="chart"></div>
   {% endif %}
 
+  <section>
+    <header>
+      <h3>Authors</h3>
+    </header>
+    <ul>
+      {% for a in authors %}
+      <li><a href="{% url article_list_author a.username %}">{{ a.first_name|default:"user" }} {{ a.last_name }}</a><span>{{ a.article_count }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <header>
+      <h3>Top Technologies</h3>
+    </header>
+    <ol>
+      {% for t in top_techs %}
+      <li>
+        <a href="{% url article_list_tech t.name %}">{{ t.name }}</a>
+        <span>{{ t.article_count }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
 {% endblock %}
