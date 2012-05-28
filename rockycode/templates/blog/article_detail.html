@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block meta-desc %}
-  <meta name="Description" content="{{ article.summary|escape|truncatewords:"30" }}" />
+  <meta name="Description" content="{{ article.summary|escape|truncatewords:"100" }}" />
 {% endblock %}
 {% block meta-keywords %}
   {% load tagging_tags %}

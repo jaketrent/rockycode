@@ -2,6 +2,10 @@
 
 {% block author_tab %}active{% endblock %}
 
+{% block meta-desc %}
+  <meta name="Description" content="Meet the authors for RockyCode." />
+{% endblock %}
+
 {% block feeds %}
   {{ block.super }}
   {% for a in authors %}

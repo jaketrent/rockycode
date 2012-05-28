@@ -3,6 +3,10 @@
 
 {% block author_tab %}active{% endblock %}
 
+{% block meta-desc %}
+  <meta name="Description" content="{{ author.get_profile.bio|truncatewords_html:"100" }}" />
+{% endblock %}
+
 {% block feeds %}
   {{ block.super }}
   <link rel="alternate" type="application/rss+xml" title="{{ author.username }} feed" href="/feeds/author/{{ author.username }}.rss" />
