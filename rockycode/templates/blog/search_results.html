@@ -52,6 +52,7 @@
     <form action="{% url search %}" method="GET">
       <input type="text" name="q" value="{{ q }}" placeholder="Search" class="search" />
     </form>
+    <h2>or view <a href="{% url article_list %}">all articles</a> -- it's for fun.</h2>
   {% endif %}
 {% endblock %}
 
