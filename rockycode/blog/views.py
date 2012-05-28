@@ -31,10 +31,7 @@ def article_list_author(request, author_username):
   rawArticles = Article.objects.filter(active=True, user=user).order_by("-date_published")
   articles = util.paginate(request, rawArticles, 20)
   site_start_date = getattr(settings, 'SITE_START_DATE')
-  months = [[0]] * util.months_from_date(datetime.date.today(), site_start_date)
-  for art in rawArticles:
-    indx = util.months_from_date(art.date_published, site_start_date)
-    months[indx] = [months[indx][0] + 1]
+  months = util.get_monthly_activity(rawArticles)
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "author"
   filter_item = "%s %s" % (user[0].first_name, user[0].last_name)
@@ -45,11 +42,7 @@ def article_list_tech(request, filter_item):
   tag = get_object_or_404(Tag, name = filter_item)
   rawArticles = TaggedItem.objects.get_by_model(Article.objects.filter(active=True), tag).order_by("-date_published")
   articles = util.paginate(request, rawArticles)
-  site_start_date = getattr(settings, 'SITE_START_DATE')
-  months = [[0]] * util.months_from_date(datetime.date.today(), site_start_date)
-  for art in rawArticles:
-    indx = util.months_from_date(art.date_published, site_start_date)
-    months[indx] = [months[indx][0] + 1]
+  months = util.get_monthly_activity(rawArticles)
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count")
   filter_type = "technology"
   return render_to_response("blog/article_list.html", locals(),
