@@ -349,6 +349,17 @@ article.type-detail .author .continue {
   font-size: inherit;
   padding-left: 5px;
 }
+article.type-detail aside {
+  float: right;
+  width: 50%;
+  margin: 5px 0 5px 0 10px;
+  font-size: 1.2em;
+  background: #f7daa5;
+  padding: 15px 20px;
+  font-family: 'Josefin Slab', Georgia, serif;
+  text-shadow: 1px 1px 0px #ffffff;
+  filter: dropshadow(color=#ffffff, offx=1, offy=1);
+}
 
 .tags {
   list-style: none !important;
@@ -487,6 +498,11 @@ article.type-detail .author .continue {
   }
   #header nav ul li a {
     height: 49px;
+  }
+
+  article.type-detail aside {
+    float: none;
+    width: auto;
   }
 
   #authors li {
