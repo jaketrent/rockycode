@@ -2,11 +2,11 @@
 
 <nav id="pagination" class="two-btn">
 	{% if object.has_previous %}
-		<a href="?page={{ object.previous_page_number }}" id="prev" class="block-field box-shadow">&larr; Previous</a>
+		<a href="?page={{ object.previous_page_number }}{% if q %}&amp;q={{ q }}{% endif %}" id="prev" class="block-field box-shadow">&larr; Previous</a>
 	{% endif %}
 
   {% if object.has_next %}
-      <a href="?page={{ object.next_page_number }}" id="next" class="block-field box-shadow">Next &rarr;</a>
+      <a href="?page={{ object.next_page_number }}{% if q %}&amp;q={{ q }}{% endif %}" id="next" class="block-field box-shadow">Next &rarr;</a>
   {% endif %}
 </nav>
 
