@@ -6,14 +6,10 @@
 {% block article_tab %}active{% endblock %}
 
 {% block meta-desc %}
-  {% if filter_type == "technology" %}
-    <meta name="Description" content="A list of technological achievements made through the awesomeness of {{ filter_item }}" />
+  {% if q %}
+    <meta name="Description" content="An epic search through the carton of RockyCode for the last bits of '{{ q }}'" />
   {% else %}
-    {% if filter_type == "author" %}
-      <meta name="Description" content="Chronicles of {{ filter_item }}'s dabblings in the richness of technology" />
-    {% else %}
-      <meta name="Description" content="A sweet n' chunky selection of the various scoops of RockyCode goodness" />
-    {% endif %}
+    <meta name="Description" content="Begin searching through the freezer for the last carton of RockyCode" />
   {% endif %}
 {% endblock %}
 
