@@ -1,3 +1,6 @@
+{% load tagging_tags %}
+{% tags_for_object object as tag_list %}
+
 <article class="type-detail type-blog">
   <header>
     <h1>{{ object.title }}</h1>
@@ -16,15 +19,15 @@
   {% endif %}
   {{ object.get_rendered_body|safe }}
   <footer>
-    <section class="two-btn meta">
-      <header>
-        <h3>Share the delectableness</h3>
-      </header>
-      <a href="http://twitter.com/home?status=Slurp up the delectableness of RockyCode: {{ object.get_url }}" class="twitter">Twitter</a>
-      <a href="http://www.facebook.com/sharer.php?u={{ object.get_url }}&t={{ object.title }}" class="facebook">Facebook</a>
-    </section>
-
     {% with object.user.get_profile as author %}
+      <section class="two-btn meta">
+        <header>
+          <h3>Share the delectableness</h3>
+        </header>
+        <a href="http://twitter.com/intent/tweet?url={{ object.get_url }}&text={{ object.title }}{% if tag_list %}&hashtags={% for tag in tag_list %}{{ tag.name }},{% endfor %}{% endif %}&via={% if author.twitter %}{{ author.twitter }}{% else %}rockycode{% endif %}" class="twitter">Twitter</a>
+        <a href="http://www.facebook.com/sharer.php?u={{ object.get_url }}&t={{ object.title }}" class="facebook">Facebook</a>
+      </section>
+
       <section class="meta author">
         <header>
           <h3><a href="{% url author_detail author.user.username %}">About {{ author.user.first_name }} {{ author.user.last_name }}</a></h3>
