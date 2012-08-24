@@ -116,11 +116,10 @@ class Article(models.Model):
     super(Article, self).save(*args, **kwargs)
 
   def get_rendered_body(self):
-#    if self.markup != MARKUP_HTML:
-#      return self.rendered_body
-#    else:
-#      return rendercode(self.rendered_body)
-    return self.rendered_body
+    if self.markup != MARKUP_HTML:
+      return self.rendered_body
+    else:
+      return rendercode(self.rendered_body)
 
 
 class Profile(models.Model):
