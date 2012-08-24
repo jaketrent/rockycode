@@ -1,5 +1,5 @@
 import settings
-from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
+from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -12,11 +12,8 @@ SITE = Site.objects.get_current()
 FEED_TIMEOUT = getattr(settings, 'FEED_TIMEOUT', 86400) # 24 hrs
 
 class TechFeed(Feed):
-    def get_object(self, bits):
-        if len(bits) != 1:
-            raise FeedDoesNotExist
-
-        return Tag.objects.get(name__iexact=bits[0])
+    def get_object(self, request, tag):
+        return Tag.objects.get(name__iexact=tag)
 
     def title(self, obj):
         return "%s: %s articles" % (SITE.name, obj.name)
@@ -52,11 +49,8 @@ class TechFeed(Feed):
         return item.date_published
 
 class AuthorFeed(Feed):
-    def get_object(self, bits):
-        if len(bits) != 1:
-            raise FeedDoesNotExist
-
-        return get_object_or_404(User, username=bits[0])
+    def get_object(self, request, username):
+        return get_object_or_404(User, username=username)
 
     def title(self, obj):
         return "%s: %s's articles" % (SITE.name, obj.username)

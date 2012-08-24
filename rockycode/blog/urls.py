@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
 
 import settings
-from django.contrib.syndication.views import feed
 from blog.views import *
 from blog.feeds import TechFeed, AuthorFeed, AllArticlesFeed
 from profiles import views as pv
@@ -32,9 +31,10 @@ urlpatterns = patterns('',
   url(r'^authors/(?P<username>[\-\d\w]+)$', author_detail, name='author_detail'),
   url(r'^techs/$', tech_list, name="tech_list"),
 
-  url(r'^feeds/(?P<url>.*)/$', feed, {'feed_dict': feeds}, name="feeds"),
-  url(r'^feeds/(?P<url>.*)\.rss$', feed, {'feed_dict': feeds}, name='dyn-feeds'),
-  
+  url(r'^feeds/blog/$', AllArticlesFeed(), name="article-feeds"),
+  url(r'^feeds/author/(?P<username>[\-\d\w]+)\.rss$', AuthorFeed(), name='author-feeds'),
+  url(r'^feeds/tech/(?P<tag>[\-\d\w]+)\.rss$', TechFeed(), name='tech-feeds'),
+
   url(r'^blog/upload/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.UPLOAD_PATH}, name="upload_path"),
   url(r'^media/files/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.UPLOAD_PATH}, name="upload_path")
 )
