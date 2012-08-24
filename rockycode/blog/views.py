@@ -7,7 +7,7 @@ from rockycode.blog.models import Article, Collection
 from django.contrib.auth.models import User
 from django.db.models import Count, Max
 from tagging.models import Tag, TaggedItem
-import rockycode.settings
+from rockycode import settings
 from rockycode.blog import util
 from django.views.generic.simple import direct_to_template
 import datetime
