@@ -50,7 +50,6 @@ class ArticleAdmin(admin.ModelAdmin):
   prepopulated_fields = {'title_slug': ('title',)}
   search_fields = ['title','summary','body']
   date_hierarchy = 'date_published'
-  list_editable = ('tags',)
   fieldsets = (
     (None, {
         'classes': ('',),
