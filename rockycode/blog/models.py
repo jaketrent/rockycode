@@ -3,7 +3,7 @@ import os, tagging
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from rockycode.tagging_autocomplete.models import TagAutocompleteField
+#from rockycode.tagging_autocomplete.models import TagAutocompleteField
 from rockycode import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.markup.templatetags import markup
@@ -74,7 +74,7 @@ class Article(models.Model):
   source = models.FileField(upload_to='uploads/blog/source/', null=True, blank=True)
   source_path = models.CharField(max_length=500, null=True, blank=True)
   user = models.ForeignKey(User, help_text='This should be you.')
-  tags = TagAutocompleteField(help_text='Separate tags with spaces, put quotes around multiple-word tags.', blank=True, null=True)
+  tags = tagging.fields.TagField(help_text='Separate tags with spaces, put quotes around multiple-word tags.', blank=True, null=True)
   date_published = models.DateTimeField(default=datetime.now)
   date_created = models.DateTimeField(editable=False, auto_now_add=True)
   date_updated = models.DateTimeField(editable=False, auto_now=True)
