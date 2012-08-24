@@ -129,8 +129,8 @@ INSTALLED_APPS = (
     'gunicorn',
     'tagging',
     'profiles',
-    'blog',
-    'tagging_autocomplete',
+    'rockycode.blog',
+    'rockycode.tagging_autocomplete',
     'django.contrib.flatpages',
 )
 

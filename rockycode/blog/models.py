@@ -3,13 +3,12 @@ import os, tagging
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
-from tagging_autocomplete.models import TagAutocompleteField
-from settings import PROJ_PATH
-import settings
+from rockycode.tagging_autocomplete.models import TagAutocompleteField
+from rockycode import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.markup.templatetags import markup
 from django.utils.html import linebreaks
-from blog.code import rendercode
+from rockycode.blog.code import rendercode
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 from django.contrib.admin.widgets import AdminTextareaWidget
@@ -38,8 +37,8 @@ BODY_HELP = "query, <span id='epiceditor'>asdf</span>"
 class Template(models.Model):
 	title = models.CharField(max_length=250)
 	title_slug = models.SlugField(unique=True)
-	list_path = models.FilePathField(path=os.path.join(PROJ_PATH, "templates/collections/"), match=".*\.html$", recursive=True)
-	detail_path = models.FilePathField(path=os.path.join(PROJ_PATH, "templates/collections/"), match=".*\.html$", recursive=True)
+	list_path = models.FilePathField(path=os.path.join(settings.PROJ_PATH, "templates/collections/"), match=".*\.html$", recursive=True)
+	detail_path = models.FilePathField(path=os.path.join(settings.PROJ_PATH, "templates/collections/"), match=".*\.html$", recursive=True)
 	date_created = models.DateTimeField(editable=False, auto_now_add=True)
 	date_updated = models.DateTimeField(editable=False, auto_now=True)
 	active = models.BooleanField(default=True)

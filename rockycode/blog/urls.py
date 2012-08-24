@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
 
-import settings
-from blog.views import *
-from blog.feeds import TechFeed, AuthorFeed, AllArticlesFeed
+from rockycode import settings
+from rockycode.blog.views import *
+from rockycode.blog.feeds import TechFeed, AuthorFeed, AllArticlesFeed
 from profiles import views as pv
 from django.core.urlresolvers import reverse
 

@@ -1,5 +1,5 @@
 from django.forms.widgets import Textarea
-from settings import STATIC_URL
+from rockycode.settings import STATIC_URL
 
 class EpicEditor(Textarea):
   class Media:

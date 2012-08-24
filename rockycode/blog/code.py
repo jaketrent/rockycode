@@ -7,7 +7,7 @@ from pygments.lexers import get_lexer_by_name, guess_lexer
 from markdown import markdown
 
 # BeautifulSoup: http://www.crummy.com/software/BeautifulSoup/
-from blog.BeautifulSoup import BeautifulSoup
+from rockycode.blog.BeautifulSoup import BeautifulSoup
 
 def rendercode(content, safe="unsafe"):
     """Render this content for display."""

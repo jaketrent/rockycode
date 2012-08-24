@@ -2,7 +2,7 @@ from django import template
 from django.template.defaultfilters import stringfilter
 from django.template import loader
 register = template.Library()
-from blog.models import Article
+from rockycode.blog.models import Article
 from django.template.defaultfilters import stringfilter
 
 @register.simple_tag

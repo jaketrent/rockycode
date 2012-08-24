@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-import dateutil, datetime, settings
+import dateutil, datetime
+from rockycode import settings
 from dateutil.relativedelta import relativedelta
 
 def paginate(request, obj_list, num_per_page=20):

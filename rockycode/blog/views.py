@@ -3,12 +3,12 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404
 
-from blog.models import Article, Collection
+from rockycode.blog.models import Article, Collection
 from django.contrib.auth.models import User
 from django.db.models import Count, Max
 from tagging.models import Tag, TaggedItem
-import settings
-from blog import util
+import rockycode.settings
+from rockycode.blog import util
 from django.views.generic.simple import direct_to_template
 import datetime
 from dateutil.relativedelta import relativedelta

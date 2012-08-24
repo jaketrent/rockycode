@@ -1,13 +1,12 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import User
-from blog.models import Article, Collection, Template
+from rockycode.blog.models import Article, Collection, Template, Profile
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from blog.widgets import EpicEditor
-from settings import STATIC_URL
+from rockycode.blog.widgets import EpicEditor
+from rockycode.settings import STATIC_URL
 from django.utils.translation import ugettext_lazy as _
-from rockycode.blog.models import Profile
 
 BODY_HELP = _("""
 <style>

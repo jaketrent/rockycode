@@ -1,9 +1,9 @@
-import settings
+from rockycode import settings
 from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
-from blog.models import Article
+from rockycode.blog.models import Article
 from tagging.models import Tag, TaggedItem
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
