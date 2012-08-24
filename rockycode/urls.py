@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rockycode.blog.models import ArticleSitemap
-from rockycode.settings import STATIC_URL
+from rockycode import settings
 
 from django.contrib import admin
 admin.autodiscover()
@@ -12,15 +12,11 @@ sitemaps = {
 
 urlpatterns = patterns('',
     (r'^', include('rockycode.blog.urls')),
-    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '%simages/favicon.ico' % STATIC_URL}),
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '%simages/favicon.ico' % settings.STATIC_URL}),
     (r'^tagging_autocomplete/', include('rockycode.tagging_autocomplete.urls')),
     (r'^profile/', include('profiles.urls'), {'success_url': '/profile/edit/'}),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
-
-    # Examples:
-    # url(r'^$', 'rockycode.views.home', name='home'),
-    # url(r'^rockycode/', include('rockycode.foo.urls')),
 
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}, name="sitemap"),
 
@@ -30,3 +26,8 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG is False:
+  urlpatterns += patterns('',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+  )
