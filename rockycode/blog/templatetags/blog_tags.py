@@ -39,5 +39,5 @@ def submit_row_publish(context):
     'is_popup': is_popup,
     'show_save': True,
     'original': original,
-    'show_publish': (original and original.collection and original.collection.title_slug == "blog")
+    'show_publish': (original and hasattr(original, 'collection') and original.collection.title_slug == "blog")
   }
