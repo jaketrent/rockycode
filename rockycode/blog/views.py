@@ -13,6 +13,7 @@ from django.views.generic.simple import direct_to_template
 import datetime
 from dateutil.relativedelta import relativedelta
 from rockycode.blog.search import get_query
+from django.http import HttpResponsePermanentRedirect
 
 def home(request):
   articles = Article.objects.filter(active=True).order_by('-date_published')[:5]
@@ -54,10 +55,13 @@ def article_list_tech(request, filter_item):
 
 def article_detail(request, slug):
   article = get_object_or_404(Article, title_slug = slug)
-  disqus_forum = getattr(settings, 'DISQUS_FORUM', 'rockycode')
-  disqus_dev = getattr(settings, 'DISQUS_DEV', '0')
-  return render_to_response("blog/article_detail.html", locals(),
-                            context_instance=RequestContext(request))
+  if article.user.username == 'jaketrent':
+    return HttpResponsePermanentRedirect('http://jaketrent.com/post/' + slug)
+  else:
+    disqus_forum = getattr(settings, 'DISQUS_FORUM', 'rockycode')
+    disqus_dev = getattr(settings, 'DISQUS_DEV', '0')
+    return render_to_response("blog/article_detail.html", locals(),
+                              context_instance=RequestContext(request))
 
 def author_list(request):
   authors = User.objects.annotate(article_count=Count('article__id'), has_active=Count('article__active')).filter(has_active__gt=0, article_count__gt=0).order_by("-article_count","id")
