@@ -57,6 +57,10 @@ def article_detail(request, slug):
   article = get_object_or_404(Article, title_slug = slug)
   if article.user.username == 'jaketrent':
     return HttpResponsePermanentRedirect('http://jaketrent.com/post/' + slug)
+  elif slug == 'using-autorandr-undocking-goodness':
+    return HttpResponsePermanentRedirect('http://blog.johannish.com/2014/07/using-autorandr-for-undocking-goodness.html')
+  elif slug == 'using-ubuntu-ppa-repositories-behind-firewall':
+    return HttpResponsePermanentRedirect('http://blog.johannish.com/2014/07/using-ubuntu-ppa-repositories-behind.html')
   else:
     disqus_forum = getattr(settings, 'DISQUS_FORUM', 'rockycode')
     disqus_dev = getattr(settings, 'DISQUS_DEV', '0')
